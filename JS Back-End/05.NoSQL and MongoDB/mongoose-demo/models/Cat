@@ -1,0 +1,24 @@
+const mongoose = require('mongoose');
+
+const catSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
+    },
+    age: Number,
+    breed: String,
+});
+
+//Method
+catSchema.methods.moew = function() { 
+    console.log(`I am ${this.name} and meow!`);
+};
+
+//Virtual property
+catSchema.virtual('info').get(function() {
+    return `${this.name} is ${this.age} - ${this.breed}!`;
+})
+
+const Cat = mongoose.model('Cat', catSchema);
+
+module.exports = Cat;
