@@ -1,4 +1,3 @@
-const db = require('../db.json');
 const Cube = require('../models/Cube');
 
 exports.getHomePage = async (req, res) => {
