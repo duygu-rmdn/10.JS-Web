@@ -1,32 +1,26 @@
-const { Schema, model, models} = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 const cubeSchema = new Schema({
     name: {
         type: String,
-        required: true
+        required: true,
     },
     description: {
         type: String,
         required: true,
-        maxLength: 50 
+        maxLength: 50, // check real length
     },
     imageUrl: {
         type: String,
-        required: true
-        //validavtion
+        required: true,
+        // Add http/https validation
     },
-    dificultyLevel: {
+    difficultyLevel: {
         type: Number,
         required: true,
+        max: 6,
         min: 1,
-        max: 6
     }
-    /*accessories: {
-        type: Number,
-        required: true,
-        minLength: 1,
-        maxLength: 6
-    },*/
 });
 
 const Cube = model('Cube', cubeSchema);
