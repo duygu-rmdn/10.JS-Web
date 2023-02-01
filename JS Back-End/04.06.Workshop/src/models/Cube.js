@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 
 const cubeSchema = new Schema({
     name: {
@@ -20,7 +20,11 @@ const cubeSchema = new Schema({
         required: true,
         max: 6,
         min: 1,
-    }
+    },
+    accessories: [{
+        type: Types.ObjectId,
+        ref: 'Accessory'
+    }]
 });
 
 const Cube = model('Cube', cubeSchema);
