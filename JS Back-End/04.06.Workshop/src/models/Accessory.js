@@ -8,12 +8,12 @@ const accessorySchema = new Schema({
     description: {
         type: String,
         required: true,
-        maxLength: 50, // check real length
+        maxLength: 50, 
     },
     imageUrl: {
         type: String,
         required: true,
-        // Add http/https validation
+        match: [/^https?:\/\//, 'Inavild url!']
     }
 });
 

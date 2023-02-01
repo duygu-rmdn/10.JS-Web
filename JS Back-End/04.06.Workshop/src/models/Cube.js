@@ -8,12 +8,17 @@ const cubeSchema = new Schema({
     description: {
         type: String,
         required: true,
-        maxLength: 50, // check real length
+        maxLength: 50,
     },
     imageUrl: {
         type: String,
         required: true,
-        // Add http/https validation
+        validate: {
+            validator: function (value) {
+                return value.startsWith('http://') || value.startsWith('https://'); 
+            },
+            message: 'URL is invalid!'
+        }
     },
     difficultyLevel: {
         type: Number,
