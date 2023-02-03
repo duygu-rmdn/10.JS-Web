@@ -2,7 +2,7 @@
   "users": [
     {
       "username": "ivan",
-      "password": "$2b$10$mCtZ.SLHYyBvWkBd7HqnqukkhY5Q6WdorhfMdrY7TYVWBOXghTQa6" // ivan
+      "password": "$2b$10$mCtZ.SLHYyBvWkBd7HqnqukkhY5Q6WdorhfMdrY7TYVWBOXghTQa6" 
     }
   ]
 }
