@@ -3,10 +3,13 @@ const router = require('express').Router();
 const cubeController = require('./controllers/cubeController');
 const homeController = require('./controllers/homeController');
 const accessoryController = require('./controllers/accessoryController');
+const authController = require('./controllers/authController');
 
 router.get('/', homeController.getHomePage);
 router.get('/about', homeController.getAboutPage);
 router.get('/404', homeController.getNotFoundPage);
+
+router.use('/', authController);
 
 router.get('/cubes/create', cubeController.getCreateCube);
 router.post('/cubes/create', cubeController.postCreateCube);
@@ -16,8 +19,8 @@ router.post('/cubes/:cubeId/attach', cubeController.postAttachAccessory);
 
 router.use('/accessories', accessoryController);
 
-router.get('/*', homeController.getNotFoundPage);
 
+router.get('/*', homeController.getNotFoundPage);
 
 
 module.exports = router;
