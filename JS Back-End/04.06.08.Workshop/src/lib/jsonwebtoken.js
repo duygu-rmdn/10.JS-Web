@@ -1,5 +1,5 @@
-const jwtCallback = require('jsonwebtoken');
 const util = require('util');
+const jwtCallback = require('jsonwebtoken');
 
 const jwt = {
     sign: jwtCallback.sign,
