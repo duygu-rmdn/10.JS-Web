@@ -4,4 +4,4 @@ exports.getOne = (cubeId) => Cube.findById(cubeId);
 
 exports.update = (cubeId, data) => Cube.findByIdAndUpdate(cubeId, data, {runValidators: true});
 
-exports.delete = (cubeId, data) => Cube.findByIdAndDelete(cubeId, data);
+exports.delete = (cubeId) => Cube.findByIdAndDelete(cubeId);

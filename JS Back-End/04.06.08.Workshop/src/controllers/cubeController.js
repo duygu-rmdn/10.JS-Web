@@ -70,13 +70,12 @@ exports.getDeleteCube = async (req, res) => {
     const cube = await cubeService.getOne(req.params.cubeId).lean();
     const difficultyLevels = cubeUtils.generateDifficultyLevels(cube.difficultyLevel);
 
-    res.render('cube/delete', { cube, difficultyLevels })
+    res.render('cube/delete', { cube, difficultyLevels });
 };
 
 //TODO
 exports.postDeleteCube = async (req, res) => {
-    const cube = await cubeService.getOne(req.params.cubeId).lean();
-    const difficultyLevels = cubeUtils.generateDifficultyLevels(cube.difficultyLevel);
+    const cube = await cubeService.delete(req.params.cubeId).lean();
 
-    res.render('cube/edit', { cube, difficultyLevels });
+    res.redirect('/');
 };
