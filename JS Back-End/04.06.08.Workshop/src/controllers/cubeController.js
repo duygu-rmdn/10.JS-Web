@@ -4,7 +4,7 @@ const cubeService = require('../service/cubeService');
 const cubeUtils = require('../utils/cubeUtil');
 
 exports.getCreateCube = (req, res) => {
-    res.render('create');
+    res.render('cube/create');
 };
 
 exports.postCreateCube = async (req, res) => {
