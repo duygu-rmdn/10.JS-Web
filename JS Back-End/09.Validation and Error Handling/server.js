@@ -1,7 +1,9 @@
 const express = require('express');
+const validator = require('validator');
+const { body, validationResult } = require('express-validator');
 
 const validators = require('./validators');
-const {isEmail} = require('./middlewares/validatorMiddleware');
+const { isEmail } = require('./middlewares/validatorMiddleware');
 
 const app = express();
 
@@ -29,19 +31,29 @@ app.get('/login', (req, res) => {
     `)
 });
 
+//body('email').isEmail
 app.post('/login', isEmail, (req, res) => {
     const { email, password } = req.body;
+
+    // const errors = validationResult(req)
+    // if(!errors.isEmpty()){
+    //     res.status(400).send(errors);
+    // }
 
     // if (!validators.isEmail(email)) {
     //     return res.redirect('/404');
     // }
 
+    if (!validator.isStrongPassword(password)) {
+        return res.redirect('/404');
+    }
+
     res.redirect('/');
-}); 
+});
 
 app.get('/404', (req, res) => {
     res.send('Not found!');
 });
 
 
-app.listen(5000, () => {console.log('Server is listening...')});
+app.listen(5000, () => { console.log('Server is listening...') });

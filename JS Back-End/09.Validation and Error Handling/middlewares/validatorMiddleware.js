@@ -1,3 +1,6 @@
+const validators = require('../validators');
+
+
 exports.isEmail = (req, res, next) => {
     const { email } = req.body;
 
