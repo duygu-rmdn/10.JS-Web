@@ -1,4 +1,6 @@
 import { useEffect } from 'react'
+import styles from './Movie.module.css'
+
 export default function Movie({
     _id,
     title,
@@ -23,7 +25,7 @@ export default function Movie({
     }, [selected]);
 
     return (
-        <article>
+        <article className={styles['movie-article']}>
             <h2>{title}</h2>
             {selected && <p>Selected!</p>}
             <p>{year}</p>
