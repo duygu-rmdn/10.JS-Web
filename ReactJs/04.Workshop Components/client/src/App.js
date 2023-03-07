@@ -10,19 +10,32 @@ function App() {
     const [users, setUsers] = useState([])
     useEffect(() => {
         userService.getAll()
-        .then(setUsers)
-        .catch(err => {
-            console.log(err);
-        });
+            .then(setUsers)
+            .catch(err => {
+                console.log(err);
+            });
 
     }, []);
+
+    const onUserCreateSubmit = async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.currentTarget);
+        const data = Object.fromEntries(formData);
+        
+        const result = await userService.create(data);
+        console.log(result);
+    } 
+
     return (
         <>
             <Heather />
             <main className="main">
                 <section className="card users-container">
                     <Search />
-                    <UserList users={users}/>
+                    <UserList users={users} onUserCreateSubmit={onUserCreateSubmit}/>
+
+
                 </section>
             </main>
             <Footer />

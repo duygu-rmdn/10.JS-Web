@@ -2,22 +2,35 @@ import { useState } from "react";
 
 import * as userService from "../service/userService";
 import User from "./User";
+import UserCreate from "./UserCreate";
 import UserDetails from "./UserDeatils";
 
 
 export default function UserList({
     users,
+    onUserCreateSubmit,
 }) {
     const [selectedUser, setSelectedUser] = useState(null);
+    const [showAdduser, setShowAdddUser] = useState(false);
+
     const onInfoClick = async (userId) => {
         const user = await userService.getOne(userId);
 
         setSelectedUser(user);
     }
 
+    const OnUserAddClick = () => {
+        setShowAdddUser(true);
+    }
+
+    const OnClose = () => {
+        setShowAdddUser(false);
+    }
+
     return (
         <>
-            {selectedUser && <UserDetails {...selectedUser} setSelectedUser={setSelectedUser}/>}
+            {selectedUser && <UserDetails {...selectedUser} setSelectedUser={setSelectedUser} />}
+            {showAdduser && <UserCreate OnClose={OnClose} onUserCreateSubmit={onUserCreateSubmit}/>}
             <div className="table-wrapper">
 
                 {/* <!-- <div className="loading-shade"> -->
@@ -146,7 +159,9 @@ export default function UserList({
                         {users.map(user => <User key={user._id} {...user} onInfoClick={onInfoClick} />)}
                     </tbody>
                 </table>
+
             </div>
+            <button className="btn-add btn" onClick={OnUserAddClick}>Add new user</button>
         </>
     );
 };
