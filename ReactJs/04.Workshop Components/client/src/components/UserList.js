@@ -4,14 +4,19 @@ import * as userService from "../service/userService";
 import User from "./User";
 import UserCreate from "./UserCreate";
 import UserDetails from "./UserDeatils";
+import UserDelete from "./UserDelete";
 
 
 export default function UserList({
     users,
     onUserCreateSubmit,
+    onUserDelete,
+    OnUserUpdateSubmit,
 }) {
     const [selectedUser, setSelectedUser] = useState(null);
-    const [showAdduser, setShowAdddUser] = useState(false);
+    const [showDeleteUser, setShowDeleteUser] = useState(null);
+    const [showEditUser, setShowEditUser] = useState(null);
+    const [showAdduser, setShowAddUser] = useState(false);
 
     const onInfoClick = async (userId) => {
         const user = await userService.getOne(userId);
@@ -20,17 +25,63 @@ export default function UserList({
     }
 
     const OnUserAddClick = () => {
-        setShowAdddUser(true);
+        setShowAddUser(true);
     }
 
     const OnClose = () => {
-        setShowAdddUser(false);
+        setSelectedUser(null);
+        setShowAddUser(false);
+        setShowDeleteUser(null);
+        setShowEditUser(null);
+    }
+
+    const onUserCreateSubmitHandler = (e) => {
+        onUserCreateSubmit(e);
+        setShowAddUser(false);
+    }
+
+    const onDeleteClick = (userId) => {
+        setShowDeleteUser(userId);
+    }
+
+    const OnDeleteHandler = () => {
+        onUserDelete(showDeleteUser);
+        OnClose();
+    }
+
+    const onEditClick = async (userId) => {
+        const user = await userService.getOne(userId);
+        setShowEditUser(user)
+    }
+
+    const onUserUpdateSubmitHandler = (e, userId) => {
+        OnUserUpdateSubmit(e, userId);
+        //setShowEditUser(null);
+        OnClose();
     }
 
     return (
         <>
-            {selectedUser && <UserDetails {...selectedUser} setSelectedUser={setSelectedUser} />}
-            {showAdduser && <UserCreate OnClose={OnClose} onUserCreateSubmit={onUserCreateSubmit}/>}
+            {selectedUser && <UserDetails
+                {...selectedUser}
+                setSelectedUser={setSelectedUser}
+                OnClose={OnClose}
+            />}
+            {showAdduser && <UserCreate
+                OnClose={OnClose}
+                onUserCreateSubmit={onUserCreateSubmitHandler}
+            />}
+
+            {showDeleteUser && <UserDelete
+                OnClose={OnClose}
+                OnDelete={OnDeleteHandler}
+            />}
+            {showEditUser && <UserCreate 
+                user={showEditUser}
+                OnClose={OnClose} 
+                onUserCreateSubmit={onUserUpdateSubmitHandler} 
+            />}
+
             <div className="table-wrapper">
 
                 {/* <!-- <div className="loading-shade"> -->
@@ -156,7 +207,13 @@ export default function UserList({
                         </tr>
                     </thead>
                     <tbody>
-                        {users.map(user => <User key={user._id} {...user} onInfoClick={onInfoClick} />)}
+                        {users.map(user => <User
+                            key={user._id}
+                            {...user}
+                            onInfoClick={onInfoClick}
+                            onDeleteClick={onDeleteClick}
+                            onEditClick={onEditClick}
+                        />)}
                     </tbody>
                 </table>
 

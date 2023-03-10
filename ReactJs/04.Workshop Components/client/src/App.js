@@ -22,10 +22,27 @@ function App() {
 
         const formData = new FormData(e.currentTarget);
         const data = Object.fromEntries(formData);
+
+        const createdUser = await userService.create(data);
+        setUsers(state => [...state, createdUser]);
+    }
+
+    const onUserDelete = async (userId) => {
+        await userService.remove(userId);
+
+        setUsers(state => state.filter(x => x._id !== userId));
+    };
+
+    const OnUserUpdateSubmit = async (e, userId) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.currentTarget);
+        const data = Object.fromEntries(formData);
         
-        const result = await userService.create(data);
-        console.log(result);
-    } 
+        const updatedUser = await userService.modify(userId, data);
+        setUsers(state => state.map(x => x._id === userId ? updatedUser : x));
+    }
+
 
     return (
         <>
@@ -33,7 +50,11 @@ function App() {
             <main className="main">
                 <section className="card users-container">
                     <Search />
-                    <UserList users={users} onUserCreateSubmit={onUserCreateSubmit}/>
+                    <UserList users={users}
+                        onUserCreateSubmit={onUserCreateSubmit}
+                        OnUserUpdateSubmit={OnUserUpdateSubmit}
+                        onUserDelete={onUserDelete}
+                    />
 
 
                 </section>
