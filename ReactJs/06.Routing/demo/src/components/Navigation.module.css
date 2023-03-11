@@ -1,0 +1,19 @@
+.navigation li {
+    list-style: none;
+    text-decoration: none;
+    display: inline;
+    margin-left: 20px;
+}
+
+.navigation li:hover {
+    text-decoration: underline;
+}   
+
+.navigation a {
+    color: white;
+    text-decoration: none;
+}
+
+.nav-active {
+    color: purple !important;
+}
