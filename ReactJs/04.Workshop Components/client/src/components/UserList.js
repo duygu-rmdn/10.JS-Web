@@ -12,6 +12,10 @@ export default function UserList({
     onUserCreateSubmit,
     onUserDelete,
     OnUserUpdateSubmit,
+    formValues,
+    formChangeHandler,
+    formErrors,
+    validateForm,
 }) {
     const [selectedUser, setSelectedUser] = useState(null);
     const [showDeleteUser, setShowDeleteUser] = useState(null);
@@ -70,6 +74,10 @@ export default function UserList({
             {showAdduser && <UserCreate
                 OnClose={OnClose}
                 onUserCreateSubmit={onUserCreateSubmitHandler}
+                formValues={formValues}
+                formChangeHandler={formChangeHandler}
+                formErrors={formErrors}
+                validateForm={validateForm}
             />}
 
             {showDeleteUser && <UserDelete
@@ -80,6 +88,10 @@ export default function UserList({
                 user={showEditUser}
                 OnClose={OnClose} 
                 onUserCreateSubmit={onUserUpdateSubmitHandler} 
+                formValues={formValues}
+                formChangeHandler={formChangeHandler}
+                formErrors={formErrors}
+                validateForm={validateForm}
             />}
 
             <div className="table-wrapper">
