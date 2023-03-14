@@ -35,7 +35,7 @@ function App() {
                     <Route path='/' element={<Home/>} />
                     <Route path='/catalog' element={<Catalog games={games}/>} />
                     <Route path='/create' element={<Create onCreateGameSubmit={onCreateGameSubmit}/>} />
-                    <Route path='/details' element={<Details/>} />
+                    <Route path='/catalog/:gameId' element={<Details />} />
                     <Route path='/edit' element={<Edit/>} />
                     <Route path='/login' element={<Login/>} />
                     <Route path='/register' element={<Register/>} />

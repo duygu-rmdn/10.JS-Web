@@ -16,7 +16,6 @@ const request = async (method, url, data) => {
 
     try {
         const result = await response.json();
-    
         return result;
     } catch (error) {
         return {};
