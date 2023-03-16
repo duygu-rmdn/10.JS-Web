@@ -4,8 +4,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
 export const Header = () => {
-    return(
-        <Navbar bg="light" expand="lg">
+  return (
+    <Navbar bg="light" expand="lg">
       <Container>
         <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -28,5 +28,5 @@ export const Header = () => {
         </Navbar.Collapse>
       </Container>
     </Navbar>
-    )
+  )
 }
